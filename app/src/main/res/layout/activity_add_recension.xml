@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_linear_layout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".add_recension">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarRec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        app:titleTextColor="@android:color/black"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="380dp"
+        android:layout_height="37dp"
+        android:text="Seleziona un percorso da recensire"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="86dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="345dp"
+        android:layout_height="41dp"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="145dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="380dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="30dp"
+        android:text="Scrivi la recensione"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="234dp"
+        android:layout_marginLeft="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextR"
+        android:layout_width="335dp"
+        android:layout_height="304dp"
+        android:layout_marginLeft="10dp"
+        android:ems="10"
+        android:inputType="textMultiLine|textPersonName"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="292dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/rounded_button"
+        android:text="AGGIUNGI"
+        android:textColor="@android:color/white"
+
+        />
+
+
+</LinearLayout>
