@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    tools:context=".Principale">
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="222dp"
+        android:layout_height="179dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginBottom="41dp"
+        app:layout_constraintBottom_toTopOf="@+id/accedi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/accedi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="9dp"
+        android:background="@drawable/rounded_button"
+        android:text="ACCEDI"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/registrati"
+        app:layout_constraintEnd_toEndOf="@+id/registrati"
+        app:layout_constraintStart_toStartOf="@+id/registrati"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <Button
+        android:id="@+id/registrati"
+        android:layout_width="224dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="179dp"
+        android:background="@drawable/rounded_button"
+        android:text="REGISTRATI"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accedi" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,45 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.marchetrekking">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".add_recension" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Recension" android:screenOrientation="portrait"/>
+        <activity android:name=".Mappa" android:screenOrientation="portrait"/>
+        <activity android:name=".DettaglioPercorso" android:screenOrientation="portrait"/>
+        <activity android:name=".ElencoPercorsi" android:screenOrientation="portrait" />
+        <activity android:name=".Home" android:screenOrientation="portrait"/>
+        <activity android:name=".aggPercorso" android:screenOrientation="portrait"/>
+        <activity android:name=".NuovoPercorsoDesc" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity_login"
+            android:noHistory="true"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Principale"
+            android:noHistory="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
+    </application>
+</manifest>

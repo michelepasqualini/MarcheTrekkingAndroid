@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NuovoPercorsoDesc"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        app:titleTextColor="@android:color/black"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:scrollX="-25dp">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome del percorso" />
+
+            <EditText
+                android:id="@+id/nomeP"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descrizione del percorso" />
+
+            <EditText
+                android:id="@+id/descP"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:ems="10"
+                android:inputType="textMultiLine|textPersonName" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lunghezza percorso" />
+
+            <EditText
+                android:id="@+id/lungP"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Livello di difficoltà" />
+
+            <EditText
+                android:id="@+id/livP"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="31dp"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Durata del pecorso" />
+
+            <EditText
+                android:id="@+id/durataP"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+
+            <Button
+                android:id="@+id/nuovop"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/rounded_button"
+                android:text="Crea nuovo percorso"
+                android:textColor="@android:color/background_light" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

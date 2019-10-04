@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+
+    <array name="icone">
+        <item>@drawable/marche</item>
+        <item>@drawable/marche</item>
+        <item>@drawable/marche</item>
+        <item>@drawable/marche</item>
+
+    </array>
+
+</resources>
