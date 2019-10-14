@@ -1,5 +1,6 @@
 package com.example.marchetrekking;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
@@ -47,12 +49,12 @@ public class Recension extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         session=new SessionManager(this);
-        HashMap<String,String> utente = session.getUserDetail();
+        final HashMap<String,String> utente = session.getUserDetail();
 
         lv=(ListView) findViewById(R.id.listRec) ;
         ly=(LinearLayout) findViewById(R.id.recPercorsi) ;
 
-        Intent i=getIntent();
+        final Intent i=getIntent();
 
 
         HttpURLConnection client = null;
@@ -94,6 +96,80 @@ public class Recension extends AppCompatActivity {
                 client.disconnect();
             }
         }
+
+       lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+               final int p = position;
+                       AlertDialog.Builder builder1 = new AlertDialog.Builder(Recension.this);
+                       builder1.setMessage("Vuoi cancellare questa recensione?");
+                       builder1.setCancelable(true);
+
+                       builder1.setPositiveButton(
+                               "Yes",
+                               new DialogInterface.OnClickListener() {
+                                   public void onClick(DialogInterface dialog, int id) {
+                                       if(listAdapter.getItem(p).getUtente().equals(utente.get(SessionManager.NAME))){
+                                           System.out.println("Funziona");
+                                           HttpURLConnection client = null;
+                                           URL url;
+                                           try {
+                                               url = new URL("http://marchetrekking.altervista.org/cancellaRecensione.php");
+
+                                               client = (HttpURLConnection) url.openConnection();
+                                               client.setRequestMethod("POST");
+                                               client.setDoOutput(true);
+                                               client.setDoInput(true);
+                                               OutputStream out = new BufferedOutputStream(client.getOutputStream());
+                                               BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+
+                                               String data = URLEncoder.encode("recensione", "UTF-8")
+                                                       + "=" + URLEncoder.encode(Integer.toString(listAdapter.getItem(p).getId()) , "UTF-8");
+
+                                               writer.write(data);
+                                               writer.flush();
+                                               writer.close();
+                                               out.close();
+
+                                               InputStream in = client.getInputStream();
+                                               String json_string = ReadResponse.readStream(in).trim();
+
+                                               if(!json_string.equals("ok")) {
+                                                   Toast.makeText(Recension.this, "Errore!", Toast.LENGTH_SHORT).show();
+
+                                               }
+                                               else{
+                                                   Toast.makeText(Recension.this, "Recensione cancellata", Toast.LENGTH_SHORT).show();
+                                                   finish();
+                                               }
+                                           } catch (IOException e) {
+                                               e.printStackTrace();
+                                           }
+                                           finally{
+                                               if (client!= null){
+                                                   client.disconnect();
+                                               }
+                                           }
+                                       }else{
+                                           Toast.makeText(Recension.this, "Non puoi cancellare questa recensione!", Toast.LENGTH_SHORT).show();
+                                       }
+
+                                   }
+                               });
+
+                       builder1.setNegativeButton(
+                               "No",
+                               new DialogInterface.OnClickListener() {
+                                   public void onClick(DialogInterface dialog, int id) {
+                                   }
+                               });
+
+                       AlertDialog alert = builder1.create();
+                       alert.show();
+
+           }
+       });
     }
 
     private void fill_listview(JSONObject json_data){
@@ -105,12 +181,14 @@ public class Recension extends AppCompatActivity {
             try {
                 JSONObject value = json_data.getJSONObject(key);//valore della chiave, in questo caso nome percorso
                 //prelevo i dati ottenuti in risposta dal php
+                int id = value.getInt("IdRecensione");
                 String nome = value.getString("NomePercorso");
                 String utente =value.getString("UserName");
                 String descrizione =value.getString("Recensione");
 
+
                 //istanziazione di un oggetto per ogni percorso
-                DatiRecensioni dr=new DatiRecensioni(nome, descrizione, utente);
+                DatiRecensioni dr=new DatiRecensioni(id, nome, descrizione, utente);
                 //aggiunta dell'oggetto all'arraylist
                 drec.add(dr);
             } catch (JSONException e) {

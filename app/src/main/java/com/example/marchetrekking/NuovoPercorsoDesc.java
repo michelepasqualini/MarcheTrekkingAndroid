@@ -43,10 +43,11 @@ public class NuovoPercorsoDesc extends AppCompatActivity {
 
         longitudine= (ArrayList<String>) intent.getSerializableExtra("longitudine");
 
-        for (int i = 0; i < latitudine.size(); i++) {
+        for (int i = 0; i < latitudine.size() - 1; i++) {
 
                 map += latitudine.get(i)+ "," + longitudine.get(i) + ",";
         }
+        map += latitudine.get(latitudine.size()-1)+ "," + longitudine.get(latitudine.size()-1);
 
         nomeP=findViewById(R.id.nomeP);
         descP =findViewById(R.id.descP);

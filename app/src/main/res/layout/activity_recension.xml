@@ -20,7 +20,10 @@
     <ListView
         android:id="@+id/listRec"
         android:layout_width="match_parent"
-        android:layout_height="609dp"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         />
 
 

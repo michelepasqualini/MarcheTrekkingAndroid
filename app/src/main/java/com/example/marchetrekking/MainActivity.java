@@ -1,11 +1,13 @@
 package com.example.marchetrekking;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +20,13 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.MonthDay;
+import java.time.Year;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,10 +57,45 @@ public class MainActivity extends AppCompatActivity {
         nome = (EditText) findViewById(R.id.nome);
         cognome = (EditText) findViewById(R.id.cognome);
         data = (EditText) findViewById(R.id.data);
+        //data.setText("2005/12/31");
         telefono = (EditText) findViewById(R.id.telefono);
         email = (EditText) findViewById(R.id.mail);
         password = (EditText) findViewById(R.id.password);
         invia = (Button) findViewById(R.id.button);
+
+        final Calendar calendar = Calendar.getInstance();
+        calendar.set(2005, 11, 31);
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "yyyy/MM/dd", Locale.US);
+        data.setText(simpleDateFormat.format(calendar.getTime()));
+
+
+        final DatePickerDialog.OnDateSetListener datePicker = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                data.setText(simpleDateFormat.format(calendar.getTime()));
+
+                }
+        };
+
+        data.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                new DatePickerDialog(MainActivity.this,datePicker, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+
+        });
+        data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(MainActivity.this,datePicker, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
 
         invia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +108,13 @@ public class MainActivity extends AppCompatActivity {
                 telef = telefono.getText().toString();
                 mail = email.getText().toString();
                 pass = password.getText().toString();
+
+                String d[] =dnascita.split("/");
+                if(Integer.parseInt(d[0]) >= 2005)
+                {
+                    Toast.makeText(MainActivity.this, "Data di nascita non valida", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if(!isNullOrEmpty(user) && !isNullOrEmpty(n) && !isNullOrEmpty(c) && !isNullOrEmpty(dnascita) && !isNullOrEmpty(telef) && !isNullOrEmpty(mail) &&!isNullOrEmpty(pass) ) {
 
