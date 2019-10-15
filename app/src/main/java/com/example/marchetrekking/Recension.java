@@ -9,14 +9,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
@@ -111,7 +109,6 @@ public class Recension extends AppCompatActivity {
                                new DialogInterface.OnClickListener() {
                                    public void onClick(DialogInterface dialog, int id) {
                                        if(listAdapter.getItem(p).getUtente().equals(utente.get(SessionManager.NAME))){
-                                           System.out.println("Funziona");
                                            HttpURLConnection client = null;
                                            URL url;
                                            try {
@@ -142,6 +139,7 @@ public class Recension extends AppCompatActivity {
                                                else{
                                                    Toast.makeText(Recension.this, "Recensione cancellata", Toast.LENGTH_SHORT).show();
                                                    finish();
+
                                                }
                                            } catch (IOException e) {
                                                e.printStackTrace();

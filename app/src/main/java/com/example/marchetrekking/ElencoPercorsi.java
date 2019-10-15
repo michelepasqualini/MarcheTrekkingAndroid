@@ -1,8 +1,11 @@
 package com.example.marchetrekking;
 
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.StrictMode;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,10 +19,15 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -86,6 +94,8 @@ public class ElencoPercorsi extends AppCompatActivity {
             }
         }
 
+
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -110,6 +120,7 @@ public class ElencoPercorsi extends AppCompatActivity {
             try {
                 JSONObject value = json_data.getJSONObject(key);//valore della chiave, in questo caso nome percorso
                 //prelevo i dati ottenuti in risposta dal php
+                int id;
                 String nome =value.getString("Nome");
                 String descrizione =value.getString("Descrizione");
                 String mappa=value.getString("Mappa");
@@ -117,15 +128,20 @@ public class ElencoPercorsi extends AppCompatActivity {
                 int livello =Integer.parseInt(value.getString("Livello"));
                 String durata = value.getString("Durata");
                 String immagine;
+                DatiPercorsi dp;
                 if(!miei) {
                     immagine= value.getString("Immagine");
-                } else{
+                    //istanziazione di un oggetto per ogni percorso
+                    dp =new DatiPercorsi(nome, mappa, descrizione, lunghezza, livello, durata, immagine);
 
+                } else{
                     immagine= "logo";
+                    //istanziazione di un oggetto per ogni percorso attraverso l'id
+                    id = Integer.parseInt(value.getString("idPercUtente"));
+                    dp=new DatiPercorsi(id, nome, mappa, descrizione, lunghezza, livello, durata, immagine);
                 }
 
-                //istanziazione di un oggetto per ogni percorso
-                DatiPercorsi dp=new DatiPercorsi(nome, mappa, descrizione, lunghezza, livello, durata, immagine);
+
                 //aggiunta dell'oggetto all'arraylist
                 dperc.add(dp);
             } catch (JSONException e) {

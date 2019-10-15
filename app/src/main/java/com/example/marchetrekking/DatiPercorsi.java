@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class DatiPercorsi implements Serializable {
 
+    private int id;
     private String nome;
     private String mappa;
     private String descrizione;
@@ -21,6 +22,19 @@ public class DatiPercorsi implements Serializable {
         this.durata=durata;
         this.immagine=immagine;
     }
+
+    public DatiPercorsi(int id, String nome, String mappa, String descrizione, double lunghezza, int livello, String durata, String immagine){
+        this.id = id;
+        this.nome=nome;
+        this.mappa=mappa;
+        this.descrizione=descrizione;
+        this.lunghezza=lunghezza;
+        this.livello=livello;
+        this.durata=durata;
+        this.immagine=immagine;
+    }
+
+    public int getId(){return id;}
 
     public DatiPercorsi(String nome){
         this.nome = nome;
