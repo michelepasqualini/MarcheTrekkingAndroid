@@ -157,14 +157,7 @@ public class MainActivity extends AppCompatActivity {
                         data += "&" + URLEncoder.encode("user", "UTF-8") + "="
                                 + URLEncoder.encode(user, "UTF-8");
 
-                    /*String data = URLEncoder.encode("mail", "UTF-8")
-                            + "=" + URLEncoder.encode(mail, "UTF-8") + "&" + URLEncoder.encode("pass", "UTF-8") + "="
-                            + URLEncoder.encode(pass, "UTF-8") + "&" + URLEncoder.encode("n", "UTF-8") + "="
-                            + URLEncoder.encode(n, "UTF-8") + "&" + URLEncoder.encode("c", "UTF-8") + "="
-                            + URLEncoder.encode(c, "UTF-8") + "&" + URLEncoder.encode("dnascita", "UTF-8") + "="
-                            + URLEncoder.encode(dnascita, "UTF-8") + "&" + URLEncoder.encode("telef", "UTF-8") + "="
-                            + URLEncoder.encode(telef, "UTF-8") + "&" + URLEncoder.encode("user", "UTF-8") + "="
-                            + URLEncoder.encode(user, "UTF-8");*/
+
                         writer.write(data);
                         writer.flush();
                         writer.close();

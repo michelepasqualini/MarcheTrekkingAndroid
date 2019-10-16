@@ -81,7 +81,6 @@ public class activity_login extends AppCompatActivity {
                     InputStream in = client.getInputStream();
                     String json_string = ReadResponse.readStream(in).trim();
 
-                    //t.append(json_string);
                     if(json_string.equals("1")){
 
                         session.createSession(ulog, plog);
@@ -102,11 +101,7 @@ public class activity_login extends AppCompatActivity {
                         alertDialog.show();
                     }
 
-                    /*if (json_string.equals("1")) {
-                        Toast.makeText(activity_login.this, "Inserimento effettuato", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(activity_login.this, "Errore nell'inserimento", Toast.LENGTH_LONG).show();
-                    }*/
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {

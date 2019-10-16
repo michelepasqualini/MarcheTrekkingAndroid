@@ -89,9 +89,6 @@ public class Home extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // One of the group items (using the onClick attribute) was clicked
-        // The item parameter passed here indicates which item it is
-        // All other menu item clicks are handled by <code><a href="/reference/android/app/Activity.html#onOptionsItemSelected(android.view.MenuItem)">onOptionsItemSelected()</a></code>
 
         switch (item.getItemId()){
 

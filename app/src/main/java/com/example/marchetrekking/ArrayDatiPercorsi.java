@@ -16,37 +16,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ArrayDatiPercorsi extends ArrayAdapter<DatiPercorsi> {
-    /*FUNZIONA!!!!!
-    private Activity context;
-
-    private ArrayList<String> dp;
-    private ArrayList<Double> lung;
-
-    public ArrayDatiPercorsi(Activity context, ArrayList<String> dp, ArrayList<Double> lung) {
-
-        super(context,R.layout.rowlv, dp);
-        this.context=context;
-        this.dp=dp;
-        this.lung=lung;
-    }
-
-    @Override
-    public View getView(int position, View view, ViewGroup parent) {
-        LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.rowlv,null);
-
-        //this code gets references to objects in the listview_row.xml file
-        TextView nome = (TextView) rowView.findViewById(R.id.perc);
-        TextView l = (TextView) rowView.findViewById(R.id.descrizione);
-
-
-        //this code sets the values of the objects to values from the arrays
-        nome.setText(dp.get(position));
-        l.setText(lung.get(position).toString() + " km");
-
-        return rowView;
-
-    }*/
 
     private Activity context;
     private ArrayList<DatiPercorsi> dp;
@@ -75,8 +44,6 @@ public class ArrayDatiPercorsi extends ArrayAdapter<DatiPercorsi> {
         String img2 = dp.get(position).getImmagine();
         int drawableID = context.getResources().getIdentifier(img2,"drawable", context.getPackageName());
         img.setImageResource(drawableID);
-
-
 
         return rowView;
 

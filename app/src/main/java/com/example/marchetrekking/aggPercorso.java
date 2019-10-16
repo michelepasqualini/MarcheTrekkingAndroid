@@ -53,14 +53,7 @@ public class aggPercorso extends AppCompatActivity {
 
         array = new ArrayList();
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_crea_percorso, R.id.tappa, array);
-        //list.setAdapter(arrayAdapter);
 
-
-        //final ArrayList<TextView> latitudine=new ArrayList<TextView>();
-        //ArrayList<TextView> longitudine=new ArrayList<TextView>();
-
-
-        //int a=0;
         agg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,16 +80,7 @@ public class aggPercorso extends AppCompatActivity {
                 row.addView(et2);
                 ly.addView(row);
 
-                //tx.setTextSize(40);
-                //tlat.setText("text");
-
-                //array.add("Tappa " + a);
-                //list.setAdapter(arrayAdapter);
-
-                //lineary.addView(tx);
-                //lineary.invalidate();
-                a++;
-                //Toast.makeText(aggPercorso.this, "hai fatto click", Toast.LENGTH_LONG).show();
+                 a++;
             }
 
         });
@@ -114,12 +98,7 @@ public class aggPercorso extends AppCompatActivity {
                     EditText e2 = (EditText) view.getChildAt(2);
                     longitudine.add(e2.getText().toString());
                     punti.put(e1.getText().toString(),e2.getText().toString());
-                    //LinearLayout l2 = (LinearLayout) l.getChildAt(x);
-                    /*EditText e1 = (EditText) view.findViewById(R.id.insLat);
-                    EditText e2 = (EditText) view.findViewById(R.id.insLong;
-                    String lat = et1.getText().toString();
-                    String longi = e2.getText().toString();
-                    punti.put(lat,longi);*/
+
                 }
 
 

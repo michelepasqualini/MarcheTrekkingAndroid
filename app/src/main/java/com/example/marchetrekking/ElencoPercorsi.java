@@ -82,8 +82,7 @@ public class ElencoPercorsi extends AppCompatActivity {
             else{
                 Toast.makeText(this, "Nessuna percorso presente", Toast.LENGTH_SHORT).show();
                 finish();
-                //Intent go = new Intent(ElencoPercorsi.this, Home.class);
-                //startActivity(go);
+
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -24,7 +24,6 @@ public class Principale extends AppCompatActivity {
         btnreg = (Button) findViewById(R.id.registrati);
         btnaccedi = (Button) findViewById(R.id.accedi);
 
-        //img.loadUrl("http://marchetrekking.altervista.org/immagini/1.jpg");
 
         btnaccedi.setOnClickListener(new View.OnClickListener() {
             @Override
