@@ -56,6 +56,7 @@ public class DettaglioPercorso extends AppCompatActivity {
         Intent i=getIntent();
         dp = (DatiPercorsi) i.getSerializableExtra("desc");
 
+
         nome =dp.getNome();
         String descrizione =dp.getDescrizione();
         mappa=dp.getMappa();
@@ -90,16 +91,15 @@ public class DettaglioPercorso extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_delete, menu);
+        if(dp.getId() == 0){
+            toolbar.getMenu().findItem(R.id.delete).setVisible(false);
+        }
         return true;
     }
 
