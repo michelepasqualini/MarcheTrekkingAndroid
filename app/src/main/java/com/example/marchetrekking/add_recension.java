@@ -87,6 +87,7 @@ public class add_recension extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String percorso =  spinner.getSelectedItem().toString();
+                String nomepClean = percorso.replace("'", "''");
                 String recensione = editText.getText().toString();
                 session=new SessionManager(add_recension.this);
                 HashMap<String,String> utente = session.getUserDetail();

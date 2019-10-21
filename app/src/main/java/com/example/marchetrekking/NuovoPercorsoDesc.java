@@ -64,7 +64,9 @@ public class NuovoPercorsoDesc extends AppCompatActivity {
                 HashMap<String,String> utente = session.getUserDetail();
                 String n = utente.get(SessionManager.NAME);
                 String nP = nomeP.getText().toString();
+                String nomepClean = nP.replace("'", "''");
                 String dP = descP.getText().toString();
+                String descClean = dP.replace("'", "''");
                 String luP = lungP.getText().toString();
                 String liP = livP.getText().toString();
                 String duP = durataP.getText().toString();

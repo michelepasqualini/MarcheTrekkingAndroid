@@ -103,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
 
                 user = id.getText().toString();
                 n = nome.getText().toString();
+                String nomeClean = n.replace("'", "''");
                 c = cognome.getText().toString();
+                String cognomeClean = c.replace("'", "''");
                 dnascita = data.getText().toString();
                 telef = telefono.getText().toString();
                 mail = email.getText().toString();
