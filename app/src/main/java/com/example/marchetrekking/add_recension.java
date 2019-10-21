@@ -89,6 +89,8 @@ public class add_recension extends AppCompatActivity {
                 String percorso =  spinner.getSelectedItem().toString();
                 String nomepClean = percorso.replace("'", "''");
                 String recensione = editText.getText().toString();
+
+                String recensionClean = recensione.replace("'", "''");
                 session=new SessionManager(add_recension.this);
                 HashMap<String,String> utente = session.getUserDetail();
                 String user = utente.get(SessionManager.NAME);
@@ -108,10 +110,10 @@ public class add_recension extends AppCompatActivity {
                         OutputStream out = new BufferedOutputStream(client.getOutputStream());
                         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
                         String data = URLEncoder.encode("percorso", "UTF-8")
-                                + "=" + URLEncoder.encode(percorso, "UTF-8");
+                                + "=" + URLEncoder.encode(nomepClean, "UTF-8");
 
                         data += "&" + URLEncoder.encode("recensione", "UTF-8") + "="
-                                + URLEncoder.encode(recensione, "UTF-8");
+                                + URLEncoder.encode(recensionClean, "UTF-8");
 
                         data += "&" + URLEncoder.encode("user", "UTF-8") + "="
                                 + URLEncoder.encode(user, "UTF-8");

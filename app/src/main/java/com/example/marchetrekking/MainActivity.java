@@ -30,6 +30,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    SessionManager session;
     private String user;
     private String n;
     private String c;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        session =new SessionManager(this);
         id = (EditText) findViewById(R.id.utente);
         nome = (EditText) findViewById(R.id.nome);
         cognome = (EditText) findViewById(R.id.cognome);
@@ -169,7 +171,10 @@ public class MainActivity extends AppCompatActivity {
                         String json_string = ReadResponse.readStream(in).trim();
 
                         if (json_string.equals("1")) {
+                            session.createSession(user, pass);
                             Toast.makeText(MainActivity.this, "Inserimento effettuato", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(MainActivity.this, Home.class);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(MainActivity.this, "Errore nell'inserimento", Toast.LENGTH_LONG).show();
                         }
