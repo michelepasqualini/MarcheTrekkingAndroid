@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 mail = email.getText().toString();
                 pass = password.getText().toString();
 
-                String d[] =dnascita.split("/");
+                String d[] = dnascita.split("/");
                 if(Integer.parseInt(d[0]) >= 2005)
                 {
                     Toast.makeText(MainActivity.this, "Data di nascita non valida", Toast.LENGTH_SHORT).show();

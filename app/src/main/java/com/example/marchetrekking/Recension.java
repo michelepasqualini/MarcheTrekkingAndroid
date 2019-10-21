@@ -66,9 +66,10 @@ public class Recension extends AppCompatActivity {
             client.setDoInput(true);
             OutputStream out = new BufferedOutputStream(client.getOutputStream());
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-
+            String nome = i.getExtras().getString("NomePercorso");
+            String nClean = nome.replace("'", "''");
             String data = URLEncoder.encode("percorso", "UTF-8")
-                    + "=" + URLEncoder.encode(i.getExtras().getString("NomePercorso") , "UTF-8");
+                    + "=" + URLEncoder.encode(nClean , "UTF-8");
 
             writer.write(data);
             writer.flush();
