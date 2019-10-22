@@ -82,14 +82,19 @@ public class DettaglioPercorso extends AppCompatActivity {
             }
         });
 
-        rec.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DettaglioPercorso.this, Recension.class);
-                intent.putExtra("NomePercorso", nome);
-                startActivity(intent);
-            }
-        });
+
+        if(dp.getId() >= 1 ){
+            rec.setVisibility(View.GONE);
+        }else {
+            rec.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DettaglioPercorso.this, Recension.class);
+                    intent.putExtra("NomePercorso", nome);
+                    startActivity(intent);
+                }
+            });
+        }
 
     }
 
