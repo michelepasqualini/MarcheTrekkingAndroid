@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ import java.net.URLEncoder;
 public class activity_login extends AppCompatActivity {
     SessionManager session;
     EditText u, p;
-    Button log;
+    Button login;
     TextView t;
     String ulog,plog;
 
@@ -44,70 +45,75 @@ public class activity_login extends AppCompatActivity {
 
         u=(EditText) findViewById(R.id.nomeUtente);
         p=(EditText) findViewById(R.id.pass);
-        log = (Button) findViewById(R.id.login);
+        login = (Button) findViewById(R.id.login);
 
         session =new SessionManager(this);
 
-        log.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                Log.d("Errore0", "Ok");
                 ulog = u.getText().toString();
                 plog = p.getText().toString();
 
-                HttpURLConnection client = null;
-                URL url;
-                try {
-                    // se la richiesta è POST
-                    url = new URL("http://marchetrekking.altervista.org/login.php");
-                    client = (HttpURLConnection) url.openConnection();
-                    client.setRequestMethod("POST");
-                    client.setDoOutput(true);
-                    client.setDoInput(true);
-                    // write data in request
-                    OutputStream out = new BufferedOutputStream(client.getOutputStream());
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-                    String data = URLEncoder.encode("username", "UTF-8")
-                            + "=" + URLEncoder.encode(ulog, "UTF-8");
+                if (!isNullOrEmpty(ulog) && !isNullOrEmpty(plog)) {
+                    HttpURLConnection client = null;
+                    URL url;
+                    try {
+                        // se la richiesta è POST
+                        url = new URL("http://marchetrekking.altervista.org/login.php");
+                        client = (HttpURLConnection) url.openConnection();
+                        client.setRequestMethod("POST");
+                        client.setDoOutput(true);
+                        client.setDoInput(true);
+                        // write data in request
+                        OutputStream out = new BufferedOutputStream(client.getOutputStream());
+                        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+                        String data = URLEncoder.encode("username", "UTF-8")
+                                + "=" + URLEncoder.encode(ulog, "UTF-8");
 
-                    data += "&" + URLEncoder.encode("password", "UTF-8") + "="
-                            + URLEncoder.encode(plog, "UTF-8");
+                        data += "&" + URLEncoder.encode("password", "UTF-8") + "="
+                                + URLEncoder.encode(plog, "UTF-8");
 
 
-                    writer.write(data);
-                    writer.flush();
-                    writer.close();
-                    out.close();
+                        writer.write(data);
+                        writer.flush();
+                        writer.close();
+                        out.close();
 
-                    InputStream in = client.getInputStream();
-                    String json_string = ReadResponse.readStream(in).trim();
+                        InputStream in = client.getInputStream();
+                        String json_string = ReadResponse.readStream(in).trim();
 
-                    if(json_string.equals("1")){
+                        if (json_string.equals("1")) {
 
-                        session.createSession(ulog, plog);
+                            session.createSession(ulog, plog);
 
-                        Intent log = new Intent(activity_login.this, Home.class);
-                        startActivity(log);
+                            Intent log = new Intent(activity_login.this, Home.class);
+                            startActivity(log);
+                        } else {
+                            AlertDialog alertDialog = new AlertDialog.Builder(activity_login.this).create();
+                            alertDialog.setTitle("Alert");
+                            alertDialog.setMessage("Errore!");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        }
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (client != null) {
+                            client.disconnect();
+                        }
                     }
-                    else{
-                        AlertDialog alertDialog = new AlertDialog.Builder(activity_login.this).create();
-                        alertDialog.setTitle("Alert");
-                        alertDialog.setMessage("Errore!");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
-                    }
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (client != null) {
-                        client.disconnect();
-                    }
+                } else {
+                    Toast.makeText(activity_login.this, "Completa i campi", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -123,5 +129,10 @@ public class activity_login extends AppCompatActivity {
 
         return;
     }
+
+    public boolean isNullOrEmpty(String s){
+        return s == null || s.isEmpty();
+    }
+
 }
 
