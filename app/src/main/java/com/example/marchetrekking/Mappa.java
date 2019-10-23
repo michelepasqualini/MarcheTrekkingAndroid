@@ -1,10 +1,15 @@
 package com.example.marchetrekking;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,14 +19,19 @@ import android.support.v7.widget.Toolbar;
 import org.osmdroid.api.IMapController;
 
 import org.osmdroid.bonuspack.routing.RoadManager;
-import org.osmdroid.config.Configuration;import android.widget.Button;
+import org.osmdroid.config.Configuration;
+
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,13 +45,13 @@ public class Mappa extends AppCompatActivity {
     private IMapController mMapController;
     private String mappa;
     private List<Double> lat = new ArrayList<>();
-    private List<Double> lon= new ArrayList<>();
+    private List<Double> lon = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mappa);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMap) ;
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMap);
         toolbar.setTitle("Mappa");
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -51,26 +61,26 @@ public class Mappa extends AppCompatActivity {
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION);
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION);
         }
+
 
         mappa = getIntent().getExtras().getString("mappa");
         String[] splitter = mappa.split(",");
-        for(int i = 0; i  < splitter.length; i++){
-            if(i % 2 == 0){
-                Double d=Double.parseDouble(splitter[i]);
-                lat.add(d) ;
-            }
-            else{
-                lon.add(Double.parseDouble(splitter[i])) ;
+        for (int i = 0; i < splitter.length; i++) {
+            if (i % 2 == 0) {
+                Double d = Double.parseDouble(splitter[i]);
+                lat.add(d);
+            } else {
+                lon.add(Double.parseDouble(splitter[i]));
             }
         }
 
         setup_map(lat.get(0), lon.get(0));
 
         List<GeoPoint> geoPoints = new ArrayList<>();
-        for(int i = 0; i  < lat.size(); i++){
+        for (int i = 0; i < lat.size(); i++) {
             geoPoints.add(new GeoPoint(lat.get(i), lon.get(i)));
         }
         Polyline polyline = new Polyline();
@@ -88,7 +98,7 @@ public class Mappa extends AppCompatActivity {
 
         //end
         Marker endMarker = new Marker(mMapView);
-        endMarker.setPosition(geoPoints.get(geoPoints.size()-1));
+        endMarker.setPosition(geoPoints.get(geoPoints.size() - 1));
         mMapView.getOverlays().add(endMarker);
         endMarker.setTitle("Fine");
         endMarker.setIcon(getResources().getDrawable(R.drawable.marker_default));
@@ -99,7 +109,7 @@ public class Mappa extends AppCompatActivity {
 
     }
 
-    private void setup_map(double lat, double lon){
+    private void setup_map(double lat, double lon) {
         mMapView = (MapView) findViewById(R.id.mapview);
         mMapView.setTileSource(TileSourceFactory.MAPNIK);
         mMapView.setMultiTouchControls(true);
@@ -108,10 +118,12 @@ public class Mappa extends AppCompatActivity {
         mMapController.setZoom(16);
 
         //dove la mappa viene centrata
-        GeoPoint gPt = new GeoPoint(lat,lon);
+        GeoPoint gPt = new GeoPoint(lat, lon);
         mMapController.setCenter(gPt);
 
     }
+
+
 
     //private void setup_path(double startLat, double startLon, double endLat, double endLon){
         //OSRMRoadManager(this);

@@ -59,7 +59,7 @@
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lunghezza percorso" />
+                android:text="Lunghezza percorso (km)" />
 
             <EditText
                 android:id="@+id/lungP"
@@ -67,27 +67,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="numberDecimal"
+                />
 
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Livello di difficoltà" />
+                android:text="Livello di difficoltà (1-5)" />
 
             <EditText
                 android:id="@+id/livP"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="31dp"
-                android:ems="10"
-                android:inputType="date" />
+                android:inputType="number"
+                android:ems="10" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Durata del pecorso" />
+                android:text="Durata del pecorso (ore)" />
 
             <EditText
                 android:id="@+id/durataP"
@@ -95,7 +96,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="numberDecimal"
+                />
 
 
             <Button

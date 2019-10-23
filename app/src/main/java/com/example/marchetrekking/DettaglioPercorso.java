@@ -70,7 +70,7 @@ public class DettaglioPercorso extends AppCompatActivity {
         t.setText("Nome: " + nome + " \n"
                 + " Descrizione: " + descrizione + "\n"
                 + " Lunghezza: " + lunghezza + "km \n"
-                + " Livello: " + livello + "\n"
+                + " Livello Difficoltà: " + livello + "\n"
                 + " Durata: " + durata + "h. \n");
 
         b.setOnClickListener(new View.OnClickListener() {

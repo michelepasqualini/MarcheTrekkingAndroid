@@ -69,70 +69,78 @@ public class NuovoPercorsoDesc extends AppCompatActivity {
                 String descClean = dP.replace("'", "''");
                 String luP = lungP.getText().toString();
                 String liP = livP.getText().toString();
+
                 String duP = durataP.getText().toString();
 
                 if(!isNullOrEmpty(n) && !isNullOrEmpty(nP) && !isNullOrEmpty(dP) && !isNullOrEmpty(luP) && !isNullOrEmpty(liP) && !isNullOrEmpty(duP)) {
 
-                    HttpURLConnection client = null;
-                    URL url;
-                    try {
-                        // se la richiesta è POST
-                        url = new URL("http://marchetrekking.altervista.org/aggiungi_percorso.php");
-                        client = (HttpURLConnection) url.openConnection();
-                        client.setRequestMethod("POST");
-                        client.setDoOutput(true);
-                        client.setDoInput(true);
-                        // write data in request
-                        OutputStream out = new BufferedOutputStream(client.getOutputStream());
-                        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-                        String data = URLEncoder.encode("nome", "UTF-8")
-                                + "=" + URLEncoder.encode(nP, "UTF-8");
+                    if(Integer.parseInt(liP) < 6 && Integer.parseInt(liP)  > 0){
+                        HttpURLConnection client = null;
+                        URL url;
+                        try {
+                            // se la richiesta è POST
+                            url = new URL("http://marchetrekking.altervista.org/aggiungi_percorso.php");
+                            client = (HttpURLConnection) url.openConnection();
+                            client.setRequestMethod("POST");
+                            client.setDoOutput(true);
+                            client.setDoInput(true);
+                            // write data in request
+                            OutputStream out = new BufferedOutputStream(client.getOutputStream());
+                            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+                            String data = URLEncoder.encode("nome", "UTF-8")
+                                    + "=" + URLEncoder.encode(nP, "UTF-8");
 
-                        data += "&" + URLEncoder.encode("desc", "UTF-8") + "="
-                                + URLEncoder.encode(dP, "UTF-8");
-
-
-                        data += "&" + URLEncoder.encode("lunghezza", "UTF-8") + "="
-                                + URLEncoder.encode(luP, "UTF-8");
+                            data += "&" + URLEncoder.encode("desc", "UTF-8") + "="
+                                    + URLEncoder.encode(dP, "UTF-8");
 
 
-                        data += "&" + URLEncoder.encode("livello", "UTF-8") + "="
-                                + URLEncoder.encode(liP, "UTF-8");
+                            data += "&" + URLEncoder.encode("lunghezza", "UTF-8") + "="
+                                    + URLEncoder.encode(luP, "UTF-8");
 
 
-                        data += "&" + URLEncoder.encode("durata", "UTF-8") + "="
-                                + URLEncoder.encode(duP, "UTF-8");
+                            data += "&" + URLEncoder.encode("livello", "UTF-8") + "="
+                                    + URLEncoder.encode(liP, "UTF-8");
 
 
-                        data += "&" + URLEncoder.encode("map", "UTF-8") + "="
-                                + URLEncoder.encode(map, "UTF-8");
+                            data += "&" + URLEncoder.encode("durata", "UTF-8") + "="
+                                    + URLEncoder.encode(duP, "UTF-8");
 
 
-                        data += "&" + URLEncoder.encode("user", "UTF-8") + "="
-                                + URLEncoder.encode(n, "UTF-8");
+                            data += "&" + URLEncoder.encode("map", "UTF-8") + "="
+                                    + URLEncoder.encode(map, "UTF-8");
 
-                        writer.write(data);
-                        writer.flush();
-                        writer.close();
-                        out.close();
 
-                        InputStream in = client.getInputStream();
-                        String json_string = ReadResponse.readStream(in).trim();
+                            data += "&" + URLEncoder.encode("user", "UTF-8") + "="
+                                    + URLEncoder.encode(n, "UTF-8");
 
-                        if (json_string.equals("1")) {
-                            //Toast.makeText(NuovoPercorsoDesc.this, "Inserimento effettuato", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(NuovoPercorsoDesc.this, Home.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(NuovoPercorsoDesc.this, "Errore nell'inserimento", Toast.LENGTH_LONG).show();
+                            writer.write(data);
+                            writer.flush();
+                            writer.close();
+                            out.close();
+
+                            InputStream in = client.getInputStream();
+                            String json_string = ReadResponse.readStream(in).trim();
+
+                            if (json_string.equals("1")) {
+                                //Toast.makeText(NuovoPercorsoDesc.this, "Inserimento effettuato", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(NuovoPercorsoDesc.this, Home.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(NuovoPercorsoDesc.this, "Errore nell'inserimento", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } finally {
+                            if (client != null) {
+                                client.disconnect();
+                            }
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally {
-                        if (client != null) {
-                            client.disconnect();
-                        }
+                    }else{
+                        Toast.makeText(NuovoPercorsoDesc.this, "Livello difficoltà non corretto",Toast.LENGTH_SHORT).show();
                     }
+
+
+
                 }else{
                     Toast.makeText(NuovoPercorsoDesc.this, "Completa i campi",Toast.LENGTH_SHORT).show();
 
