@@ -99,73 +99,73 @@ public class Recension extends AppCompatActivity {
        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
                final int p = position;
-                       AlertDialog.Builder builder1 = new AlertDialog.Builder(Recension.this);
-                       builder1.setMessage("Vuoi cancellare questa recensione?");
-                       builder1.setCancelable(true);
+               if(listAdapter.getItem(p).getUtente().equals(utente.get(SessionManager.NAME)))
+               {
+                   AlertDialog.Builder builder1 = new AlertDialog.Builder(Recension.this);
+                   builder1.setMessage("Vuoi cancellare questa recensione?");
+                   builder1.setCancelable(true);
 
-                       builder1.setPositiveButton(
-                               "Yes",
-                               new DialogInterface.OnClickListener() {
-                                   public void onClick(DialogInterface dialog, int id) {
-                                       if(listAdapter.getItem(p).getUtente().equals(utente.get(SessionManager.NAME))){
-                                           HttpURLConnection client = null;
-                                           URL url;
-                                           try {
-                                               url = new URL("http://marchetrekking.altervista.org/cancellaRecensione.php");
+                   builder1.setPositiveButton(
+                           "Yes",
+                           new DialogInterface.OnClickListener() {
+                               public void onClick(DialogInterface dialog, int id) {
+                                   if (listAdapter.getItem(p).getUtente().equals(utente.get(SessionManager.NAME))) {
+                                       HttpURLConnection client = null;
+                                       URL url;
+                                       try {
+                                           url = new URL("http://marchetrekking.altervista.org/cancellaRecensione.php");
 
-                                               client = (HttpURLConnection) url.openConnection();
-                                               client.setRequestMethod("POST");
-                                               client.setDoOutput(true);
-                                               client.setDoInput(true);
-                                               OutputStream out = new BufferedOutputStream(client.getOutputStream());
-                                               BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+                                           client = (HttpURLConnection) url.openConnection();
+                                           client.setRequestMethod("POST");
+                                           client.setDoOutput(true);
+                                           client.setDoInput(true);
+                                           OutputStream out = new BufferedOutputStream(client.getOutputStream());
+                                           BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
 
-                                               String data = URLEncoder.encode("recensione", "UTF-8")
-                                                       + "=" + URLEncoder.encode(Integer.toString(listAdapter.getItem(p).getId()) , "UTF-8");
+                                           String data = URLEncoder.encode("recensione", "UTF-8")
+                                                   + "=" + URLEncoder.encode(Integer.toString(listAdapter.getItem(p).getId()), "UTF-8");
 
-                                               writer.write(data);
-                                               writer.flush();
-                                               writer.close();
-                                               out.close();
+                                           writer.write(data);
+                                           writer.flush();
+                                           writer.close();
+                                           out.close();
 
-                                               InputStream in = client.getInputStream();
-                                               String json_string = ReadResponse.readStream(in).trim();
+                                           InputStream in = client.getInputStream();
+                                           String json_string = ReadResponse.readStream(in).trim();
 
-                                               if(!json_string.equals("ok")) {
-                                                   Toast.makeText(Recension.this, "Errore!", Toast.LENGTH_SHORT).show();
+                                           if (!json_string.equals("ok")) {
+                                               Toast.makeText(Recension.this, "Errore!", Toast.LENGTH_SHORT).show();
 
-                                               }
-                                               else{
-                                                   Toast.makeText(Recension.this, "Recensione cancellata", Toast.LENGTH_SHORT).show();
-                                                   finish();
+                                           } else {
+                                               Toast.makeText(Recension.this, "Recensione cancellata", Toast.LENGTH_SHORT).show();
+                                               finish();
 
-                                               }
-                                           } catch (IOException e) {
-                                               e.printStackTrace();
                                            }
-                                           finally{
-                                               if (client!= null){
-                                                   client.disconnect();
-                                               }
+                                       } catch (IOException e) {
+                                           e.printStackTrace();
+                                       } finally {
+                                           if (client != null) {
+                                               client.disconnect();
                                            }
-                                       }else{
-                                           Toast.makeText(Recension.this, "Non puoi cancellare questa recensione!", Toast.LENGTH_SHORT).show();
                                        }
-
+                                   } else {
+                                       Toast.makeText(Recension.this, "Non puoi cancellare questa recensione!", Toast.LENGTH_SHORT).show();
                                    }
-                               });
 
-                       builder1.setNegativeButton(
-                               "No",
-                               new DialogInterface.OnClickListener() {
-                                   public void onClick(DialogInterface dialog, int id) {
-                                   }
-                               });
+                               }
+                           });
 
-                       AlertDialog alert = builder1.create();
-                       alert.show();
+                   builder1.setNegativeButton(
+                           "No",
+                           new DialogInterface.OnClickListener() {
+                               public void onClick(DialogInterface dialog, int id) {
+                               }
+                           });
+
+                   AlertDialog alert = builder1.create();
+                   alert.show();
+               }
 
            }
        });
