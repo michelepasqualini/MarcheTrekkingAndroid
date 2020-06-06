@@ -19,12 +19,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_marginTop="5dp"
+
             android:layout_width="match_parent"
             android:layout_height="208dp"
             android:layout_weight="1"
@@ -36,7 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/dettaglio"
@@ -46,29 +47,54 @@
             android:layout_marginLeft="10dp"
             android:text="TextView" />
 
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="20dp">
+
         <Button
             android:id="@+id/map"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button"
-            android:textColor="@android:color/white"
-            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:text="Mappa" />
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:text="Mappa"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/recensione"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Recensione"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
             android:background="@drawable/rounded_button"
-            android:textColor="@android:color/white"
+            android:text="Recensione"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/scopri"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-
-        />
-
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:text="Scopri"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 

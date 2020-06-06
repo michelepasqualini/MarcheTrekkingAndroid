@@ -18,7 +18,7 @@ public class Home extends AppCompatActivity {
     SessionManager session;
     private Toolbar t;
     Button lo;
-    Button percorsi, insperc, mypercorsi;
+    Button percorsi, insperc, mypercorsi, start;
     Button recension;
 
     @Override
@@ -39,6 +39,7 @@ public class Home extends AppCompatActivity {
         insperc=(Button) findViewById(R.id.insPercorso);
         recension =(Button) findViewById(R.id.fai);
         mypercorsi=(Button) findViewById(R.id.mypercorsi);
+        start = (Button) findViewById(R.id.inizia);
 
 
 
@@ -77,6 +78,14 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent p = new Intent(Home.this, Attivita.class);
+                startActivity(p);
+            }
+        });
+
 
 
     }
@@ -94,6 +103,11 @@ public class Home extends AppCompatActivity {
 
             case R.id.l:
                 session.logout();
+                return true;
+
+            case R.id.e:
+                Intent p = new Intent(Home.this, Emergenza.class);
+                startActivity(p);
                 return true;
 
             default:

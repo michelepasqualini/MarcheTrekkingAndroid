@@ -25,6 +25,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class activity_login extends AppCompatActivity {
     SessionManager session;
@@ -49,6 +51,10 @@ public class activity_login extends AppCompatActivity {
 
         session =new SessionManager(this);
 
+        ulog = u.getText().toString();
+        plog = p.getText().toString();
+
+
         login.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -57,7 +63,17 @@ public class activity_login extends AppCompatActivity {
                 ulog = u.getText().toString();
                 plog = p.getText().toString();
 
+                //nome utente formato da soli caratteri alfanumerici più  _ e – di lungezza min 3 e max 20
+                Pattern pattern = Pattern.compile("^[A-Za-z0-9_-]{3,20}$");
+                Matcher m = pattern.matcher(ulog);
+
+
+
+
                 if (!isNullOrEmpty(ulog) && !isNullOrEmpty(plog)) {
+                    if(!m.matches()){
+                        Toast.makeText(activity_login.this, "Caratteri non ammessi", Toast.LENGTH_SHORT).show();
+                    }
                     HttpURLConnection client = null;
                     URL url;
                     try {
@@ -93,8 +109,8 @@ public class activity_login extends AppCompatActivity {
                             startActivity(log);
                         } else {
                             AlertDialog alertDialog = new AlertDialog.Builder(activity_login.this).create();
-                            alertDialog.setTitle("Alert");
-                            alertDialog.setMessage("Errore!");
+                            alertDialog.setTitle("Errore");
+                            alertDialog.setMessage("UserName o Password errati!");
                             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
@@ -112,7 +128,7 @@ public class activity_login extends AppCompatActivity {
                             client.disconnect();
                         }
                     }
-                } else {
+                }else {
                     Toast.makeText(activity_login.this, "Completa i campi", Toast.LENGTH_SHORT).show();
                 }
             }

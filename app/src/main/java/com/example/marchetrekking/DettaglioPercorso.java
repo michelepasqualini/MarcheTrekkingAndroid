@@ -2,6 +2,7 @@ package com.example.marchetrekking;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class DettaglioPercorso extends AppCompatActivity {
     private ImageView img;
     private DatiPercorsi dp;
     private Toolbar toolbar;
+    private Button attr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class DettaglioPercorso extends AppCompatActivity {
         b=(Button) findViewById(R.id.map);
         rec=(Button) findViewById(R.id.recensione);
         img = (ImageView) findViewById(R.id.imageView);
+        attr = (Button)  findViewById(R.id.scopri);
 
         //prendo gli extras passato dall'intent dall'activity ElencoPercorsi
         Intent i=getIntent();
@@ -67,11 +70,12 @@ public class DettaglioPercorso extends AppCompatActivity {
         int drawableID = getResources().getIdentifier(immagine,"drawable",getPackageName());
         img.setImageResource(drawableID);
 
-        t.setText("Nome: " + nome + " \n"
-                + " Descrizione: " + descrizione + "\n"
-                + " Lunghezza: " + lunghezza + "km \n"
-                + " Livello Difficoltà: " + livello + "\n"
-                + " Durata: " + durata + "h. \n");
+
+        t.setText(" \n" + "Nome: " + nome + " \n"
+                + " \n" + "Descrizione: " + descrizione + "\n"
+                + " \n" + "Lunghezza: " + lunghezza + "km \n"
+                + " \n" + "Livello Difficoltà: " + livello + "\n"
+                + " \n" + "Durata: " + durata + "h. \n");
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +89,7 @@ public class DettaglioPercorso extends AppCompatActivity {
 
         if(dp.getId() >= 1 ){
             rec.setVisibility(View.GONE);
+            attr.setVisibility(View.GONE);
         }else {
             rec.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,7 +99,18 @@ public class DettaglioPercorso extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+
+            attr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DettaglioPercorso.this, Attrazioni.class);
+                    intent.putExtra("NomePercorso", nome);
+                    startActivity(intent);
+                }
+            });
         }
+
+
 
     }
 
