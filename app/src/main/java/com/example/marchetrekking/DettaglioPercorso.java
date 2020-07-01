@@ -40,7 +40,7 @@ public class DettaglioPercorso extends AppCompatActivity {
     private ImageView img;
     private DatiPercorsi dp;
     private Toolbar toolbar;
-    private Button attr;
+    private Button scopri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class DettaglioPercorso extends AppCompatActivity {
         b=(Button) findViewById(R.id.map);
         rec=(Button) findViewById(R.id.recensione);
         img = (ImageView) findViewById(R.id.imageView);
-        attr = (Button)  findViewById(R.id.scopri);
+        scopri = (Button)  findViewById(R.id.scopri);
 
         //prendo gli extras passato dall'intent dall'activity ElencoPercorsi
         Intent i=getIntent();
@@ -89,7 +89,7 @@ public class DettaglioPercorso extends AppCompatActivity {
 
         if(dp.getId() >= 1 ){
             rec.setVisibility(View.GONE);
-            attr.setVisibility(View.GONE);
+            scopri.setVisibility(View.GONE);
         }else {
             rec.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -100,10 +100,10 @@ public class DettaglioPercorso extends AppCompatActivity {
                 }
             });
 
-            attr.setOnClickListener(new View.OnClickListener() {
+            scopri.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(DettaglioPercorso.this, Attrazioni.class);
+                    Intent intent = new Intent(DettaglioPercorso.this, Scopri.class);
                     intent.putExtra("NomePercorso", nome);
                     startActivity(intent);
                 }

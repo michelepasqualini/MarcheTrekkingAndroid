@@ -1,7 +1,6 @@
 package com.example.marchetrekking;
 
 
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;

@@ -20,7 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DettaglioAttrazione"></activity>
+        <activity
+            android:name=".Scopri"
+            android:screenOrientation="portrait" ></activity>
+        <activity
+            android:name=".DettaglioProdotti"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Prodotti"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DettaglioAttrazione"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Emergenza"
             android:screenOrientation="portrait" />

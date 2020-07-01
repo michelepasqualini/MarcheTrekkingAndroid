@@ -10,11 +10,11 @@ public class DatiAttrazioni implements Serializable{
     private String immagine;
     private String nomePercorso;
 
-    public DatiAttrazioni(String nomeattrazione ,String descrizione, String immagine ){
+    /*public DatiAttrazioni(String nomeattrazione ,String descrizione, String immagine ){
         this.nomeattrazione = nomeattrazione;
         this.descrizione = descrizione;
         this.immagine = immagine;
-    }
+    }*/
 
 
 

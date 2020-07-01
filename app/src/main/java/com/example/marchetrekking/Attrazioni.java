@@ -34,10 +34,8 @@ public class Attrazioni extends AppCompatActivity {
     private LinearLayout ly;
     private ListView lv;
     private ArrayList aAttrazioni;
-
     private ArrayAdapter<String> arrayAd;
     private ArrayDatiAttrazioni listAdapter;
-
     private Toolbar t;
     SessionManager session;
 
@@ -56,6 +54,7 @@ public class Attrazioni extends AppCompatActivity {
         getSupportActionBar().setTitle("Attrazioni");
 
         lv=(ListView) findViewById(R.id.lista) ;
+        //uso lo stesso layout
         ly=(LinearLayout) findViewById(R.id.lypercosi) ;
 
         Intent i=getIntent();
@@ -115,7 +114,7 @@ public class Attrazioni extends AppCompatActivity {
 
     }
 
-    private void fill_listview(JSONObject json_data/*, boolean miei*/){
+    private void fill_listview(JSONObject json_data){
         ArrayList<DatiAttrazioni> dattr = new ArrayList<>(); //creazione array di attrazioni
         Iterator<String> iter = json_data.keys();//iterator che permette scorrere l'arraylist
         while (iter.hasNext()) {
@@ -136,7 +135,7 @@ public class Attrazioni extends AppCompatActivity {
                 //aggiunta dell'oggetto all'arraylist
                 dattr.add(da);
             }catch (JSONException e) {
-                // Something went wrong!
+
             }
         }
         listAdapter = new ArrayDatiAttrazioni(Attrazioni.this, dattr);
